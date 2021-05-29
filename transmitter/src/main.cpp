@@ -1,19 +1,24 @@
 // cat doorbell transmitter module
 
 #include <Arduino.h>
-#include <RH_ASK.h>   // Amplitude Shift Keying
+#include <RF24.h>     // RF 2.4GHz library
+#include <nRF24L01.h> // Driver for 2.4GHz transceiver driver
 #include <SPI.h>      // Serial Peripheral Interface
 
 #define ECHO_PIN   2  // D2 ; HC-SR04 echo
 #define TRIG_PIN   3  // D3 ; HC-SR04 trigger
+#define CSN_PIN    4  // D4 ; Chip Select Not (CSN) active low
+#define CE_PIN     5  // D5 ; Chip Enable (CE) active high
 #define LED_PIN    7  // D7 ; LED activated when in range
 
 #define MAX_CM 15  // range to trigger in CM; ~32" == 81cm
 
+const byte address[6] = "00011"; // cat-doorbell comms address
+const char *msg = "Hello world"; // payload to receiver module
 
+// globals
+RF24 radio(9, 8);  // CE,CSN
 float distance, duration;
-RH_ASK radiohead;
-const char *msg = "Hello world";
 
 
 void setup(){
@@ -27,9 +32,10 @@ void setup(){
     Serial1.begin(9600);
     Serial1.println("\nUART initialized.");
 
-    if(!radiohead.init()){
-        Serial.println("RF driver initialization failed.");
-    }
+    // init radio module as transmitter
+    radio.begin();
+    radio.openWritingPipe(address);
+    radio.stopListening();
 }
 
 // send ultrasonic ping to get distance of object
@@ -53,14 +59,12 @@ void loop(){
 
     // check if cat is in front of door
     if(distance < MAX_CM){
-        // send msg to receiver module
         Serial.print("Sending message ");
         Serial.println(msg);
 
-        radiohead.send((uint8_t *) msg, strlen(msg));
-        digitalWrite(LED_PIN, HIGH);
+        // send msg to receiver module
+        radio.write(&msg, sizeof(msg));
 
-        radiohead.waitPacketSent();
         delay(500);
     } else{
         digitalWrite(LED_PIN, LOW);

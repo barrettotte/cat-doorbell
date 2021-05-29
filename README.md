@@ -1,7 +1,6 @@
-# Cat Doorbell
+# cat-doorbell
 
 A proximity sensor to detect my cat outside my door and flash an LED at my desk.
-
 
 ## Summary
 
@@ -19,17 +18,12 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 
 ## Part List
 
-- 2x Arduino Micro Pro (ATMEGA32U4)
-- Ultrasonic Module HC-SR04
-- HC-SR501 PIR Infared Sensor
-
-## Notes
-
-- Get serial port - ```ls /dev/tty*```
+- 2 x Arduino Micro Pro (ATMEGA32U4)
+- 2 x NRF24L01 2.4GHz Transceiver
+- 1 x Ultrasonic Module HC-SR04
 
 ## References
 
 - [Platformio Arduino Leonardo](https://docs.platformio.org/en/latest/boards/atmelavr/leonardo.html)
 - [HC-SR04 Ultrasonic Sensor - Last Minute Engineers](https://lastminuteengineers.com/arduino-sr04-ultrasonic-sensor-tutorial/)
-- [433 MHz RF Modules](https://www.youtube.com/watch?v=b5C9SPVlU4U)
-
+- [NRF24L01 - Last Minute Engineers](https://lastminuteengineers.com/nrf24l01-arduino-wireless-communication/)
