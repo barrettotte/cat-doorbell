@@ -8,13 +8,13 @@
 #define DEBUG   1               // toggle debug mode
 
 // pinout
-#define SPKR_PIN          6  // D6  ; Piezo speaker beep when in range
-#define LED_PIN           7  // D7  ; LED notification that transmitter found something
-#define CE_PIN            9  // D9  ; Chip Enable (CE) active high
-#define CSN_PIN           10 // D10 ; Chip Select Not (CSN) active low
-#define SOFT_SPI_MISO_PIN 14 // D14 ; Master In Slave Out (MISO) - SPI output to NRF24L01
-#define SOFT_SPI_SCK_PIN  15 // D15 ; Serial Clock (SCLK) - clock pulse from SPI bus master
-#define SOFT_SPI_MOSI_PIN 16 // D16 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
+#define LED_PIN    5 // D5  ; LED notification that transmitter found something
+#define SPKR_PIN   6 // D6  ; Piezo speaker beep when in range
+#define CE_PIN     7 // D7  ; Chip Enable (CE) - set NRF24L01 to transmit/receive
+#define CSN_PIN    8 // D8  ; Chip Select Not (CSN) - NRF24L01 listen to SPI port for data
+#define MOSI_PIN  11 // D11 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
+#define MISO_PIN  12 // D12 ; Master In Slave Out (MISO) - SPI output to NRF24L01
+#define SCK_PIN   13 // D13 ; Serial Clock (SCK) - clock pulse from SPI bus master
 
 // debug precompile
 #if DEBUG == 1
@@ -52,39 +52,36 @@ void setup(){
 
 void loop(){
    
-    while(radio.available()) {
+    if(radio.available()) {
         radio.read(&radioBuffer, sizeof(radioBuffer));
-    }
-       
-    // DEBUG_PRINT("  Received message: ");
-    // DEBUG_PRINTLN(radioBuffer[0]);
 
-    // check if valid payload
-    if (radioBuffer[0] != 0) {
         // DEBUG_PRINT("  Received message: ");
         // DEBUG_PRINTLN(radioBuffer[0]);
-        DEBUG_PRINTLN("WE DID IT !!!!!!");
 
-        // DEBUG_PRINTLN("Cat is in front of door!");
-        digitalWrite(LED_PIN, HIGH);
-        tone(SPKR_PIN, 1500, 500); // 0.5s @ 1.5 KHz
-        delay(500);
-    } 
-    digitalWrite(LED_PIN, LOW);
-    // delay(500);
+        // check if valid payload
+        if (radioBuffer[0] != 0) {
+            // DEBUG_PRINT("  Received message: ");
+            // DEBUG_PRINTLN(radioBuffer[0]);
+            DEBUG_PRINTLN("WE DID IT !!!!!!");
+
+            // DEBUG_PRINTLN("Cat is in front of door!");
+            digitalWrite(LED_PIN, HIGH);
+            tone(SPKR_PIN, 1500, 500); // 0.5s @ 1.5 KHz
+            delay(500);
+        } 
+        digitalWrite(LED_PIN, LOW);
+        // delay(500);
+    }
 }
 
 // initialize radio module
 void initRadio(){
-    if (!radio.begin()) {
-        Serial.println("Radio module failed to start.");
-        while(1){}
-    }
+    radio.begin();
     radio.setChannel(108); // channel above most WiFi
     radio.setDataRate(RF24_250KBPS);
     radio.setRetries(3, 5);   // delay * 250 us, retries
     radio.setPayloadSize(sizeof(radioBuffer));
-    radio.setPALevel(RF24_PA_LOW);
-    radio.openReadingPipe(1, PIPE_ADDR);
+    radio.setPALevel(RF24_PA_MAX);
+    radio.openReadingPipe(0, PIPE_ADDR);
     radio.startListening(); // set as receiver
 }

@@ -9,14 +9,14 @@
 #define MAX_CM 15               // range to trigger in CM; ~32" == 81cm
 
 // pinout
-#define ECHO_PIN          2  // D2  ; HC-SR04 echo
-#define TRIG_PIN          3  // D3  ; HC-SR04 trigger
-#define LED_PIN           7  // D7  ; LED activated when object in range of HC-SR04
-#define CE_PIN            9  // D9  ; Chip Enable (CE) - set NRF24L01 to transmit/receive
-#define CSN_PIN           10 // D10 ; Chip Select Not (CSN) - NRF24L01 listen to SPI port for data
-#define SOFT_SPI_MISO_PIN 14 // D14 ; Master In Slave Out (MISO) - SPI output to NRF24L01
-#define SOFT_SPI_SCK_PIN  15 // D15 ; Serial Clock (SCLK) - clock pulse from SPI bus master
-#define SOFT_SPI_MOSI_PIN 16 // D16 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
+#define ECHO_PIN   2 // D2  ; HC-SR04 echo
+#define TRIG_PIN   3 // D3  ; HC-SR04 trigger
+#define LED_PIN    5 // D5  ; LED activated when object in range of HC-SR04
+#define CE_PIN     7 // D7  ; Chip Enable (CE) - set NRF24L01 to transmit/receive
+#define CSN_PIN    8 // D8  ; Chip Select Not (CSN) - NRF24L01 listen to SPI port for data
+#define MOSI_PIN  11 // D11 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
+#define MISO_PIN  12 // D12 ; Master In Slave Out (MISO) - SPI output to NRF24L01
+#define SCK_PIN   13 // D13 ; Serial Clock (SCK) - clock pulse from SPI bus master
 
 // debug precompile
 #if DEBUG == 1
@@ -100,15 +100,12 @@ void loop(){
 
 // initialize radio module
 void initRadio(){
-    if (!radio.begin()) {
-        Serial.println("Radio module failed to start.");
-        while(1){}
-    }
+    radio.begin();
     radio.setChannel(108); // channel above most WiFi
     radio.setDataRate(RF24_250KBPS);
     radio.setRetries(3, 5);  // delay * 250 us,count
     radio.setPayloadSize(sizeof(payload));
-    radio.setPALevel(RF24_PA_LOW); // set as low power
+    radio.setPALevel(RF24_PA_MAX);
     radio.openWritingPipe(PIPE_ADDR);
-    radio.stopListening(); // set as transmitter
+    // radio.stopListening(); // set as transmitter
 }
