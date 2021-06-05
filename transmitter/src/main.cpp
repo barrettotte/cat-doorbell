@@ -5,7 +5,7 @@
 #include <nRF24L01.h> // 2.4GHz transceiver driver
 #include <SPI.h>      // Serial Peripheral Interface
 
-#define DEBUG   1               // toggle debug mode
+#define DEBUG   0               // toggle debug mode
 #define MAX_CM 15               // range to trigger in CM; ~32" == 81cm
 
 // pinout
@@ -65,9 +65,9 @@ void ping(){
     duration = pulseIn(ECHO_PIN, HIGH);
     distance = duration * (0.034 / 2); // 1/2 speed of sound wave
 
-    // DEBUG_PRINT("Distance: ");
-    // DEBUG_PRINT(distance);
-    // DEBUG_PRINTLN(" cm");
+    DEBUG_PRINT("Distance: ");
+    DEBUG_PRINT(distance);
+    DEBUG_PRINTLN(" cm");
 }
 
 void loop(){
@@ -90,7 +90,7 @@ void loop(){
                 delay(50);
             }
         } else {
-            DEBUG_PRINTLN("Tx failed.");
+            DEBUG_PRINTLN("Tx failed");
         }
     } else{
         digitalWrite(LED_PIN, LOW);
@@ -103,9 +103,9 @@ void initRadio(){
     radio.begin();
     radio.setChannel(108); // channel above most WiFi
     radio.setDataRate(RF24_250KBPS);
-    radio.setRetries(3, 5);  // delay * 250 us,count
+    radio.setRetries(15, 15);  // delay * 250 us,count
     radio.setPayloadSize(sizeof(payload));
-    radio.setPALevel(RF24_PA_MAX);
+    radio.setPALevel(RF24_PA_MIN);
     radio.openWritingPipe(PIPE_ADDR);
-    // radio.stopListening(); // set as transmitter
+    radio.stopListening(); // set as transmitter
 }

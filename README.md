@@ -19,8 +19,9 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 ## Part List
 
 - 2 x Arduino Nano ATmega328
-- 2 x NRF24L01 2.4GHz Transceiver
+- 2 x NRF24L01 2.4GHz Transceiver module
 - 2 x 10μF electrolytic capacitor
+- 2 x Micro USB breakout board
 - 2 x Red LED
 - 2 x 570 Ω resistor
 - 1 x 100 Ω resistor

@@ -5,7 +5,7 @@
 #include <nRF24L01.h> // 2.4GHz transceiver driver
 #include <SPI.h>      // Serial Peripheral Interface
 
-#define DEBUG   1               // toggle debug mode
+#define DEBUG  0      // toggle debug mode
 
 // pinout
 #define LED_PIN    5 // D5  ; LED notification that transmitter found something
@@ -17,7 +17,7 @@
 #define SCK_PIN   13 // D13 ; Serial Clock (SCK) - clock pulse from SPI bus master
 
 // debug precompile
-#if DEBUG == 1
+#if DEBUG == 0
   #define DEBUG_PRINT(s)   Serial.print(s)
   #define DEBUG_PRINTLN(s) Serial.println(s)
 #else
@@ -55,22 +55,17 @@ void loop(){
     if(radio.available()) {
         radio.read(&radioBuffer, sizeof(radioBuffer));
 
-        // DEBUG_PRINT("  Received message: ");
-        // DEBUG_PRINTLN(radioBuffer[0]);
+        DEBUG_PRINT("  Received message: ");
+        DEBUG_PRINTLN(radioBuffer[0]);
 
         // check if valid payload
-        if (radioBuffer[0] != 0) {
-            // DEBUG_PRINT("  Received message: ");
-            // DEBUG_PRINTLN(radioBuffer[0]);
-            DEBUG_PRINTLN("WE DID IT !!!!!!");
-
-            // DEBUG_PRINTLN("Cat is in front of door!");
+        if (radioBuffer[0] == '!') {
+            DEBUG_PRINTLN("Cat is in front of door!");
             digitalWrite(LED_PIN, HIGH);
             tone(SPKR_PIN, 1500, 500); // 0.5s @ 1.5 KHz
             delay(500);
         } 
         digitalWrite(LED_PIN, LOW);
-        // delay(500);
     }
 }
 
