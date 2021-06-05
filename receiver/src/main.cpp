@@ -35,6 +35,7 @@ void initRadio();
 RF24 radio(CE_PIN, CSN_PIN);
 uint8_t radioBuffer[1] = {0};
 
+
 void setup(){
     pinMode(SPKR_PIN, OUTPUT);
     pinMode(LED_PIN, OUTPUT);
@@ -51,7 +52,6 @@ void setup(){
 }
 
 void loop(){
-   
     if(radio.available()) {
         radio.read(&radioBuffer, sizeof(radioBuffer));
 
@@ -64,7 +64,10 @@ void loop(){
             digitalWrite(LED_PIN, HIGH);
             tone(SPKR_PIN, 1500, 500); // 0.5s @ 1.5 KHz
             delay(500);
-        } 
+        } else {
+          digitalWrite(LED_PIN, LOW);
+        }
+    } else {
         digitalWrite(LED_PIN, LOW);
     }
 }
