@@ -1,6 +1,6 @@
 # cat-doorbell
 
-A proximity sensor to detect my cat outside my door and flash an LED at my desk.
+A proximity sensor to detect my cat outside my door and flash an LED at my desk via RF.
 
 ## Summary
 
@@ -20,11 +20,12 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 
 - 2 x Arduino Nano ATmega328
 - 2 x NRF24L01 2.4GHz Transceiver module
-- 2 x 10μF electrolytic capacitor
+- 2 x 100μF electrolytic capacitor
 - 2 x Micro USB breakout board
+- 2 x LD33V 3.3V voltage regulator
 - 2 x Red LED
-- 2 x 570 Ω resistor
-- 1 x 100 Ω resistor
+- 2 x 570Ω resistor
+- 1 x 100Ω resistor
 - 1 x Piezo Speaker
 - 1 x Switch
 - 1 x Ultrasonic module HC-SR04
