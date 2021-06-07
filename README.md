@@ -1,12 +1,11 @@
 # cat-doorbell
 
-A proximity sensor to detect my cat outside my door and flash an LED at my desk via RF.
+A proximity sensor to detect my cat outside my door and flash an LED at my desk.
 
 ## Summary
 
 I generally have noise cancelling headphones on and my cat will sit outside my door
-meowing late at night when it wants to come in. It's probably annoying to my parents
-and I think it breaks my cat's heart when it can't come in.
+meowing late at night when it wants to come in.
 
 This project has two modules, a transmitter and receiver.
 The transmitter module will detect my cat using a proximity sensor and send an RF
@@ -29,6 +28,13 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 - 1 x Piezo Speaker
 - 1 x Switch
 - 1 x Ultrasonic module HC-SR04
+
+## Improvements
+
+Stuff I thought about as the project was pretty much done
+
+- Use terminal blocks instead of four dupont cables
+- A potentiometer to adjust ultrasonic sensor max range (useful for tuning)
 
 ## References
 
