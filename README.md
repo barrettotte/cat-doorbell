@@ -21,13 +21,26 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 - 2 x NRF24L01 2.4GHz Transceiver module
 - 2 x 100μF electrolytic capacitor
 - 2 x Micro USB breakout board
-- 2 x LD33V 3.3V voltage regulator
+- 2 x LD1117V33 3.3V linear voltage regulator
 - 2 x Red LED
 - 2 x 570Ω resistor
 - 1 x 100Ω resistor
 - 1 x Piezo Speaker
 - 1 x Switch
 - 1 x Ultrasonic module HC-SR04
+
+## Schematics
+
+I decided to give [EasyEDA](https://easyeda.com/) a try for drawing schematics, but I wasn't
+ready to dive into complete PCB making yet. I hope to do this in my next electronics project.
+
+### Receiver Module
+
+![docs/schematic-receiver-readme.png](docs/schematic-receiver-readme.png)
+
+### Transmitter Module
+
+TODO:
 
 ## Improvements
 
