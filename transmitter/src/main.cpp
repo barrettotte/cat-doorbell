@@ -5,18 +5,18 @@
 #include <nRF24L01.h> // 2.4GHz transceiver driver
 #include <SPI.h>      // Serial Peripheral Interface
 
-#define DEBUG   0               // toggle debug mode
-#define MAX_CM 15               // range to trigger in CM; ~32" == 81cm
+#define DEBUG   0     // toggle debug mode
+#define MAX_CM 81     // range to trigger in CM; ~32" == 81cm
 
 // pinout
-#define ECHO_PIN   2 // D2  ; HC-SR04 echo
-#define TRIG_PIN   3 // D3  ; HC-SR04 trigger
-#define LED_PIN    5 // D5  ; LED activated when object in range of HC-SR04
-#define CE_PIN     7 // D7  ; Chip Enable (CE) - set NRF24L01 to transmit/receive
-#define CSN_PIN    8 // D8  ; Chip Select Not (CSN) - NRF24L01 listen to SPI port for data
-#define MOSI_PIN  11 // D11 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
-#define MISO_PIN  12 // D12 ; Master In Slave Out (MISO) - SPI output to NRF24L01
-#define SCK_PIN   13 // D13 ; Serial Clock (SCK) - clock pulse from SPI bus master
+#define ECHO_PIN   2  // D2  ; HC-SR04 echo
+#define TRIG_PIN   3  // D3  ; HC-SR04 trigger
+#define LED_PIN    5  // D5  ; LED activated when object in range of HC-SR04
+#define CE_PIN     7  // D7  ; Chip Enable (CE) - set NRF24L01 to transmit/receive
+#define CSN_PIN    8  // D8  ; Chip Select Not (CSN) - NRF24L01 listen to SPI port for data
+#define MOSI_PIN  11  // D11 ; Master Out Slave In (MOSI) - SPI input to NRF24L01
+#define MISO_PIN  12  // D12 ; Master In Slave Out (MISO) - SPI output to NRF24L01
+#define SCK_PIN   13  // D13 ; Serial Clock (SCK) - clock pulse from SPI bus master
 
 // debug precompile
 #if DEBUG == 1
