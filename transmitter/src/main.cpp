@@ -6,7 +6,7 @@
 #include <SPI.h>      // Serial Peripheral Interface
 
 #define DEBUG   0     // toggle debug mode
-#define MAX_CM 81     // range to trigger in CM; ~32" == 81cm
+#define MAX_CM 60     // range to trigger in CM; ~32" == 81cm
 
 // pinout
 #define ECHO_PIN   2  // D2  ; HC-SR04 echo
