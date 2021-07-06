@@ -36,7 +36,7 @@ ready to dive into complete PCB making yet. I hope to do this in my next electro
 
 ### Receiver Module
 
-![docs/schematic-receiver-readme.png](docs/schematic-receiver-readme.png)
+![docs/schematic-receiver-readme.PNG](docs/schematic-receiver-readme.PNG)
 
 ### Transmitter Module
 
