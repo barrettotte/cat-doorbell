@@ -29,18 +29,17 @@ trigger at the same time as the LED. I feel like it might get annoying hence the
 - 1 x Switch
 - 1 x Ultrasonic module HC-SR04
 
-## Schematics
+## Images
 
-I decided to give [EasyEDA](https://easyeda.com/) a try for drawing schematics, but I wasn't
-ready to dive into complete PCB making yet. I hope to do this in my next electronics project.
+### Receiver
 
-### Receiver Module
+![docs/receiver.jpg](docs/receiver.jpg)
 
-![docs/schematic-receiver-readme.PNG](docs/schematic-receiver-readme.PNG)
+### Transmitter
 
-### Transmitter Module
+![docs/transmitter.jpg](docs/transmitter.jpg)
 
-TODO:
+![docs/sensor.jpg](docs/sensor.jpg)
 
 ## Improvements
 
